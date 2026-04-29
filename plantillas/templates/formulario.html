@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+  <meta charset="UTF-8">
+
+  <title>Facultad de Odontología</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: #0d1117;
+      color: white;
+    }
+
+    .navbar-custom {
+      background-color: #1f6feb;
+    }
+
+    .navbar-custom .nav-link,
+    .navbar-custom .navbar-brand {
+      color: white !important;
+    }
+
+    .navbar-custom .nav-link:hover {
+      color: #c9d1d9 !important;
+    }
+
+    .container-box {
+      background-color: #161b22;
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+
+
+<nav class="navbar navbar-expand-lg navbar-custom">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="/">Formatos Clínicos</a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="menu">
+      <ul class="navbar-nav">
+
+        <li class="nav-item">
+          <a class="nav-link" href="/leyfederal">Ley Federal de Protección de Datos</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/contacto">Contacto</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+            Formatos clinicos
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/historial-general">Historial clinico general</a></li>
+            <li><a class="dropdown-item" href="#">Especifico materia 1</a></li>
+            <li><a class="dropdown-item" href="#">Especifico materia 2</a></li>
+          </ul>
+        </li>
+
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+<div class="container container-box">
+
+  <h2>Generador de Historial Clínico</h2>
+
+  <p>
+Este sistema permite la creación y gestión de historiales clínicos odontológicos de manera estructurada, facilitando el registro, organización y consulta de información del paciente para su posterior análisis clínico.
+
+Desarrollado en colaboración con la Facultad de Informática Culiacán y la carrera de Ingeniería en Ciencia de Datos, el sistema busca optimizar los procesos de captura y validación de información clínica mediante el uso de estructuras digitales estandarizadas, con el objetivo de reducir errores humanos y mejorar la eficiencia del proceso.
+
+El manejo de los datos se realiza conforme a los principios de confidencialidad y a la normativa aplicable en materia de protección de datos personales.
+  </p>
+
+</div>
+
+<div class="text-center mt-4">
+  <img src="static/uas.png" alt="Logo Universidad" width="120">
+  <h4 class="mt-2">Sursum Versus</h4>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<!--
+<h1>Historial Clínico</h1>
+
+<form id="formulario">
+    <input name="curp" placeholder="CURP"><br>
+    <input name="paciente" placeholder="Paciente"><br>
+    <input name="diagnostico" placeholder="Diagnóstico"><br>
+    <input name="tratamiento" placeholder="Tratamiento"><br>
+    <input name="observaciones" placeholder="Observaciones"><br>
+    <button type="submit">Generar PDF</button>
+</form>
+
+
+<script>
+document.getElementById("formulario").addEventListener("submit", async (e) => {
+    e.preventDefault()
+
+    const f = e.target
+
+    const data = {
+        curp: f.curp.value,
+        paciente: f.paciente.value,
+        diagnostico: f.diagnostico.value,
+        tratamiento: f.tratamiento.value,
+        observaciones: f.observaciones.value
+    }
+
+    const res = await fetch("/historial-general", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    })
+
+    const blob = await res.blob()
+    window.open(URL.createObjectURL(blob))
+})
+</script>
+-->
+</body>
+</html>
+

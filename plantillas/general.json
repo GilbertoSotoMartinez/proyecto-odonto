@@ -1,0 +1,10 @@
+{
+  "motivo_consulta": "",
+  "diagnostico": "",
+  "plan_tratamiento": "",
+  "observaciones": "",
+  "signos_vitales": {
+    "presion": "",
+    "temperatura": ""
+  }
+}

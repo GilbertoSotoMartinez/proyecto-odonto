@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Historial Clínico</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 40px; }
+    h1 { color: #1f6feb; border-bottom: 2px solid #1f6feb; padding-bottom: 10px; }
+    .section { margin: 20px 0; }
+    .label { font-weight: bold; color: #333; }
+    .value { margin-left: 10px; }
+    .footer { margin-top: 40px; font-size: 12px; color: #666; }
+  </style>
+</head>
+<body>
+
+<h1>Historial Clínico General</h1>
+
+<div class="section">
+  <span class="label">Paciente:</span>
+  <span class="value">{{ paciente }}</span>
+</div>
+
+<div class="section">
+  <span class="label">Fecha:</span>
+  <span class="value">{{ fecha }}</span>
+</div>
+
+<div class="section">
+  <span class="label">Diagnóstico:</span>
+  <div class="value">{{ diagnostico }}</div>
+</div>
+
+<div class="section">
+  <span class="label">Tratamiento:</span>
+  <div class="value">{{ tratamiento }}</div>
+</div>
+
+<div class="section">
+  <span class="label">Observaciones:</span>
+  <div class="value">{{ observaciones }}</div>
+</div>
+
+<div class="footer">
+  <p>Documento generado por el Sistema de Formatos Clínicos - Facultad de Odontología</p>
+</div>
+
+</body>
+</html>
