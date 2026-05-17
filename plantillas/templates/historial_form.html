@@ -99,6 +99,14 @@
       <input type="text" class="form-control" name="ocupacion" required>
     </div>
     <div class="mb-3">
+      <label class="form-label">Correo electrónico</label>
+      <input type="email" class="form-control" name="correo" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Dirección</label>
+      <input type="text" class="form-control" name="direccion" required>
+    </div>
+    <div class="mb-3">
       <label class="form-label">Escolaridad</label>
       <select class="form-select" name="escolaridad" required>
         <option value="" disabled selected>Seleccione la escolaridad</option>
@@ -138,8 +146,10 @@ document.getElementById("historialForm").addEventListener("submit", async (e) =>
         paciente: formData.get("paciente"),
         sexo : formData.get("sexo"),
         edad: parseInt(formData.get("edad")),
-        motivo_consulta: formData.get("motivo_consulta"),
         ocupacion : formData.get("ocupacion"),
+        correo: formData.get("correo"),
+        direccion: formData.get("direccion"),
+        motivo_consulta: formData.get("motivo_consulta"),
         escolaridad: formData.get("escolaridad"),
         fecha: document.getElementById("fechaActual").value
     };
