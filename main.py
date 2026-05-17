@@ -1,9 +1,12 @@
+from attrs import field
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles # para el manejo de imagenes
 from fastapi.responses import HTMLResponse, StreamingResponse
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 from pydantic import BaseModel
+from typing import Optional
 import psycopg2
 import json
 import io
@@ -21,12 +24,14 @@ app.mount("/static", StaticFiles(directory="plantillas/templates/static"), name=
 # Clase historial general
 class HistorialGeneral(BaseModel):
     paciente: str
-    diagnostico: str
-    tratamiento: str
-    observaciones: str
+    sexo: str
+    edad: int 
+    escolaridad: str
+    motivo_consulta: str
     fecha: str
+    ocupacion: str
 
-# DB
+# Conexión a la base de datos
 conn = psycopg2.connect(
     dbname="db0",
     user="postgres",
@@ -62,12 +67,14 @@ def generar_pdf(data: HistorialGeneral):
     from datetime import datetime
     fecha_actual = datetime.now().strftime("%Y-%m-%d")
 
-    html = env.get_template("historial.html").render(
+    html = env.get_template("historial_general_pdf.html").render(
         paciente=data.paciente,
-        diagnostico=data.diagnostico,
-        tratamiento=data.tratamiento,
-        observaciones=data.observaciones,
-        fecha=fecha_actual
+        sexo=data.sexo,
+        edad=data.edad,
+        motivo_consulta=data.motivo_consulta,
+        escolaridad=data.escolaridad,
+        fecha=fecha_actual,
+        ocupacion=data.ocupacion
     )
 
     pdf = HTML(string=html).write_pdf()
@@ -77,6 +84,7 @@ def generar_pdf(data: HistorialGeneral):
         media_type="application/pdf",
         headers = {"Content-Disposition": "attachment; filename=historial.pdf"}
     )
+
 '''
 @app.post("/historial-general")
 
@@ -103,7 +111,7 @@ def historial(data: dict):
     conn.commit()
 
     # generar HTML
-    html = env.get_template("historial.html").render(**data)
+    html = env.get_template("historial_general_pdf.html").render(**data)
 
     # generar PDF
     pdf = HTML(string=html).write_pdf()

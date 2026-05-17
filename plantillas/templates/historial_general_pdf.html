@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Historial Clínico</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+      color: #333;
+    }
+
+    h1 {
+      color: #1f6feb;
+      border-bottom: 2px solid #1f6feb;
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+    }
+
+    /* CABECERA COMPACTA */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px 30px;
+      margin-bottom: 25px;
+    }
+
+    .info-item {
+      display: flex;
+    }
+
+    .label {
+      font-weight: bold;
+      min-width: 140px;
+    }
+
+    .section {
+      margin-top: 20px;
+    }
+
+    .section-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #1f6feb;
+    }
+
+    .content {
+      padding-left: 10px;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 12px;
+      color: #666;
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<h1>Historial Clínico General</h1>
+<div class="info-grid">
+  <div class="info-item">
+    <div class="label">Fecha:</div>
+    <span>{{ fecha }}</span>
+  </div>
+  <div class="info-item">
+    <div class="label">Folio:</div>
+    <span>{{ 123 }}</span>
+  </div>
+</div>
+
+<!-- DATOS GENERALES -->
+<div class="info-grid">
+
+  <div class="info-item">
+    <span class="label">Paciente:</span>
+    <span>{{ paciente }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Sexo:</span>
+    <span>{{ sexo }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Edad:</span>
+    <span>{{ edad }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Ocupación:</span>
+    <span>{{ ocupacion }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Escolaridad:</span>
+    <span>{{ escolaridad }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Correo:</span>
+    <span>{{ correo }}</span>
+  </div>
+
+  <div class="info-item">
+    <span class="label">Dirección:</span>
+    <span>{{ direccion }}</span>
+  </div>
+
+</div>
+
+<!-- MOTIVO DE CONSULTA -->
+<div class="section">
+  <div class="section-title">Motivo de Consulta</div>
+  <div class="content">
+    {{ motivo_consulta }}
+  </div>
+</div>
+
+
+<div class="footer">
+  Documento generado por el Sistema de Formatos Clínicos - Facultad de Odontología
+</div>
+
+</body>
+</html>

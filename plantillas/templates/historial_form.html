@@ -82,20 +82,37 @@
         <input type="text" class="form-control" id="fechaActual" readonly>
       </div>
     </div>
-    
     <div class="mb-3">
-      <label class="form-label">Diagnóstico</label>
-      <textarea class="form-control" name="diagnostico" rows="3" required></textarea>
+      <label class="form-label">Sexo</label>
+      <select class="form-select" name="sexo" required>
+        <option value="" disabled selected>Seleccione el sexo</option>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+      </select>
     </div>
-    
     <div class="mb-3">
-      <label class="form-label">Tratamiento</label>
-      <textarea class="form-control" name="tratamiento" rows="3" required></textarea>
+      <label class="form-label">Edad</label>
+      <input type="number" class="form-control" name="edad" required>
     </div>
-    
     <div class="mb-3">
-      <label class="form-label">Observaciones</label>
-      <textarea class="form-control" name="observaciones" rows="3"></textarea>
+      <label class="form-label">Ocupación</label>
+      <input type="text" class="form-control" name="ocupacion" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Escolaridad</label>
+      <select class="form-select" name="escolaridad" required>
+        <option value="" disabled selected>Seleccione la escolaridad</option>
+        <option value="Sin escolaridad">Sin escolaridad</option>
+        <option value="Tecnico">Tecnico</option>
+        <option value="Primaria">Primaria</option>
+        <option value="Secundaria">Secundaria</option>
+        <option value="Preparatoria">Preparatoria</option>
+        <option value="Universidad">Universidad</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Motivo de consulta</label>
+      <textarea class="form-control" name="motivo_consulta" rows="3" required></textarea>
     </div>
     
     <div class="mt-4">
@@ -112,16 +129,18 @@ document.addEventListener("DOMContentLoaded", function() {
     const fecha = today.toISOString().split('T')[0];
     document.getElementById("fechaActual").value = fecha;
 });
-
+<!--Aqui practicamente obtenemos los datos del formulario -->
 document.getElementById("historialForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     
     const formData = new FormData(e.target);
     const data = {
         paciente: formData.get("paciente"),
-        diagnostico: formData.get("diagnostico"),
-        tratamiento: formData.get("tratamiento"),
-        observaciones: formData.get("observaciones"),
+        sexo : formData.get("sexo"),
+        edad: parseInt(formData.get("edad")),
+        motivo_consulta: formData.get("motivo_consulta"),
+        ocupacion : formData.get("ocupacion"),
+        escolaridad: formData.get("escolaridad"),
         fecha: document.getElementById("fechaActual").value
     };
     
