@@ -37,14 +37,20 @@ class HistorialGeneral(BaseModel):
     observaciones_heredo: Optional[str] = None
 
 # Conexión a la base de datos
-conn = psycopg2.connect(
-    dbname="db0",
-    user="postgres",
-    password="frijolito23",
-    host="localhost",
-    port="5432"
-)
-cur = conn.cursor()
+DATABASE_URL = os.getenv("DATABASE_URL")
+conn = None
+cur = None
+if DATABASE_URL:
+    try:
+        conn = psycopg2.connect(DATABASE_URL)
+        cur = conn.cursor()
+        print("Database connected using DATABASE_URL")
+    except Exception as e:
+        print("WARNING: Failed to connect to database:", e)
+        conn = None
+        cur = None
+else:
+    print("WARNING: DATABASE_URL is not configured, database access disabled")
 
 
 # Mostrar formulario
