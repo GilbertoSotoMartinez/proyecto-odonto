@@ -28,10 +28,11 @@ class HistorialGeneral(BaseModel):
     edad: int 
     escolaridad: str
     motivo_consulta: str
-    fecha: str
+    fecha: Optional[str] = None
     ocupacion: str
     correo: str
     direccion: str
+    interrogatorio: str
 
 # Conexión a la base de datos
 conn = psycopg2.connect(
@@ -78,7 +79,8 @@ def generar_pdf(data: HistorialGeneral):
         fecha=fecha_actual,
         ocupacion=data.ocupacion,
         correo=data.correo,
-        direccion=data.direccion
+        direccion=data.direccion,
+        interrogatorio=data.interrogatorio
     )
 
     pdf = HTML(string=html).write_pdf()
