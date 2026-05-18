@@ -142,8 +142,11 @@
   <input class="form-check-input" type="radio" name="interrogatorio" id="interrogatorio" value="Interrogatorio informante" required>
   <label class="form-check-label">Interrogatorio informante</label>
 </div>
+
+<hr class="my-4">
+
 <!-- 🧬 ANTECEDENTES HEREDOFAMILIARES -->
-<h4>Antecedentes heredofamiliares</h4>
+<h5>Antecedentes heredofamiliares</h4>
 
 <div class="form-check form-switch mb-3">
 <input class="form-check-input" type="checkbox" id="antecedentesSwitch">
@@ -167,7 +170,7 @@
 
 <div id="observacionesBox" class="mt-3 d-none">
 <label class="form-label">Observaciones</label>
-<textarea class="form-control" id="observacionesHeredo"></textarea>
+<textarea class="form-control" id="observacionesHeredo" name="observaciones_heredo"></textarea>
 </div>
 
 <br>
@@ -186,12 +189,28 @@ const sw=document.getElementById("antecedentesSwitch");
 const box=document.getElementById("antecedentesBox");
 const obs=document.getElementById("observacionesBox");
 const enfermedades=document.querySelectorAll(".enfermedad");
+const observacionesText=document.getElementById("observacionesHeredo");
 
-sw.addEventListener("change",()=>box.classList.toggle("d-none",!sw.checked));
-enfermedades.forEach(e=>e.addEventListener("change",()=>{
-const alguna=[...enfermedades].some(c=>c.checked);
-obs.classList.toggle("d-none",!alguna);
-}));
+const actualizarObservaciones = () => {
+  const alguna=[...enfermedades].some(c=>c.checked);
+  obs.classList.toggle("d-none",!alguna);
+  if (!alguna) {
+    observacionesText.value = "";
+  }
+};
+
+sw.addEventListener("change",()=>{
+  const activo = sw.checked;
+  box.classList.toggle("d-none",!activo);
+  if (!activo) {
+    enfermedades.forEach(c=>c.checked = false);
+    observacionesText.value = "";
+    obs.classList.add("d-none");
+  } else {
+    actualizarObservaciones();
+  }
+});
+enfermedades.forEach(e=>e.addEventListener("change", actualizarObservaciones));
 
 document.addEventListener("DOMContentLoaded", function() {
     const today = new Date();
@@ -203,17 +222,23 @@ document.getElementById("historialForm").addEventListener("submit", async (e) =>
     e.preventDefault();
     
     const formData = new FormData(e.target);
+    const enfermedadesSeleccionadas = [...enfermedades]
+        .filter(c => c.checked)
+        .map(c => c.value);
+
     const data = {
         paciente: formData.get("paciente"),
-        sexo : formData.get("sexo"),
-        edad: parseInt(formData.get("edad")),
-        ocupacion : formData.get("ocupacion"),
+        sexo: formData.get("sexo"),
+        edad: parseInt(formData.get("edad"), 10),
+        ocupacion: formData.get("ocupacion"),
         correo: formData.get("correo"),
         direccion: formData.get("direccion"),
         motivo_consulta: formData.get("motivo_consulta"),
         escolaridad: formData.get("escolaridad"),
         fecha: document.getElementById("fechaActual").value,
-        interrogatorio: formData.get("interrogatorio")
+        interrogatorio: formData.get("interrogatorio"),
+        enfermedades_heredofamiliares: enfermedadesSeleccionadas,
+        observaciones_heredo: document.getElementById("observacionesHeredo").value.trim()
     };
     
     try {

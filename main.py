@@ -6,7 +6,7 @@ from fastapi.responses import HTMLResponse, StreamingResponse
 from jinja2 import Environment, FileSystemLoader
 from weasyprint import HTML
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 import psycopg2
 import json
 import io
@@ -33,6 +33,8 @@ class HistorialGeneral(BaseModel):
     correo: str
     direccion: str
     interrogatorio: str
+    enfermedades_heredofamiliares: Optional[List[str]] = None
+    observaciones_heredo: Optional[str] = None
 
 # Conexión a la base de datos
 conn = psycopg2.connect(
@@ -80,7 +82,9 @@ def generar_pdf(data: HistorialGeneral):
         ocupacion=data.ocupacion,
         correo=data.correo,
         direccion=data.direccion,
-        interrogatorio=data.interrogatorio
+        interrogatorio=data.interrogatorio,
+        enfermedades_heredofamiliares=data.enfermedades_heredofamiliares or [],
+        observaciones_heredo=data.observaciones_heredo or ""
     )
 
     pdf = HTML(string=html).write_pdf()

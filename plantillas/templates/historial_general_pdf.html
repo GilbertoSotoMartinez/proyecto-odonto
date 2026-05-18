@@ -121,13 +121,37 @@
     {{ motivo_consulta }}
   </div>
 </div>
-<!-- MOTIVO DE CONSULTA -->
+<!-- INTERROGATORIO -->
 <div class="section">
   <div class="section-title">Tipo de interrogatorio</div>
   <div class="content">
     {{ interrogatorio }}
   </div>
 </div>
+
+<!-- ANTECEDENTES HEREDOFAMILIARES -->
+<div class="section">
+  <div class="section-title">Antecedentes heredofamiliares</div>
+  <div class="content">
+    {% if enfermedades_heredofamiliares and enfermedades_heredofamiliares | length > 0 %}
+      <ul>
+        {% for enfermedad in enfermedades_heredofamiliares %}
+          <li>{{ enfermedad }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      El paciente no tiene enfermedades heredofamiliares.
+    {% endif %}
+  </div>
+</div>
+{% if observaciones_heredo %}
+<div class="section">
+  <div class="section-title">Observaciones heredofamiliares</div>
+  <div class="content">
+    {{ observaciones_heredo }}
+  </div>
+</div>
+{% endif %}
 
 <div class="footer">
   Documento generado por el Sistema de Formatos Clínicos - Facultad de Odontología
