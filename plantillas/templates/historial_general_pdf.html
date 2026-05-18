@@ -153,6 +153,32 @@
 </div>
 {% endif %}
 
+<!-- ANTECEDENTES PATOLOGICOS -->
+{% set patologicos = antecedentes_patologicos | default([]) %}
+<div class="section">
+  <div class="section-title">Antecedentes patológicos</div>
+  <div class="content">
+    {% if patologicos | length > 0 %}
+      <ul>
+        {% for enfermedad in patologicos %}
+          <li>{{ enfermedad }}</li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      El paciente no tiene antecedentes patológicos.
+    {% endif %}
+  </div>
+</div>
+{% if observaciones_app | default('') %}
+<div class="section">
+  <div class="section-title">Observaciones patológicas</div>
+  <div class="content">
+    {{ observaciones_app }}
+  </div>
+</div>
+{% endif %}
+
+
 <div class="footer">
   Documento generado por el Sistema de Formatos Clínicos - Facultad de Odontología
 </div>

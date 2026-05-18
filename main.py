@@ -35,6 +35,8 @@ class HistorialGeneral(BaseModel):
     interrogatorio: str
     enfermedades_heredofamiliares: Optional[List[str]] = None
     observaciones_heredo: Optional[str] = None
+    antecedentes_patologicos: Optional[List[str]] = None
+    observaciones_app: Optional[str] = None
 
 # Conexión a la base de datos
 DATABASE_URL = os.getenv("DATABASE_URL")
@@ -90,7 +92,9 @@ def generar_pdf(data: HistorialGeneral):
         direccion=data.direccion,
         interrogatorio=data.interrogatorio,
         enfermedades_heredofamiliares=data.enfermedades_heredofamiliares or [],
-        observaciones_heredo=data.observaciones_heredo or ""
+        observaciones_heredo=data.observaciones_heredo or "",
+        antecedentes_patologicos=data.antecedentes_patologicos or [],
+        observaciones_app=data.observaciones_app or ""
     )
 
     pdf = HTML(string=html).write_pdf()
